@@ -21,7 +21,7 @@ pipeline {
         sh "docker build -t myimg ."
       }
     }
-    stage('test') {
+    stage('cont_test') {
       steps {
         sh '''
           docker run -itd --name test-cont -p 8081:5000
