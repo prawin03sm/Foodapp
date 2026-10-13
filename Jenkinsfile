@@ -43,7 +43,7 @@ pipeline {
       }
       post {
         always {
-          docker rm -f test-cont
+          sh "docker rm -f test-cont"
         }
       } 
     }
