@@ -24,8 +24,9 @@ pipeline {
     }
     stage('cont_test') {
       steps {
-        sh '''
+        sh '''#!/bin/bash
           docker run -itd --name test-cont -p 8081:5000 prawin03sm/foodapp:1
+          sleep 3
           success=1
           for i in {1..10}; do
             echo "HTTP check attempt $i"
@@ -35,7 +36,7 @@ pipeline {
             fi
             sleep 2
           done
-          if ["$success" -ne 0]; then
+          if [ "$success" -ne 0 ]; then
             echo "HTTP Connection failed"
             exit 1
           fi
