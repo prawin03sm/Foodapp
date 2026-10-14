@@ -19,13 +19,13 @@ pipeline {
     stage('build') {
       steps {
         sh "docker build -t myimg ."
-        sh "docker tag myimg prawin03sm/myimg:1"
+        sh "docker tag myimg prawin03sm/foodapp:1"
       }
     }
     stage('cont_test') {
       steps {
         sh '''
-          docker run -itd --name test-cont -p 8081:5000 myimg:1
+          docker run -itd --name test-cont -p 8081:5000 prawin03sm/foodapp:1
           success=1
           for i in {1..10}; do
             echo "HTTP check attempt $i"
@@ -57,7 +57,7 @@ pipeline {
         )]) {
           sh '''
             echo "$dockerhub_password" | docker login -u "$dockerhub_user" --password-stdin
-            docker push prawin03sm/myimg:1 
+            docker push prawin03sm/foodapp:1 
           '''
         }
       }
