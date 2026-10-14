@@ -18,13 +18,13 @@ pipeline {
     }
     stage('build') {
       steps {
-        sh "docker build -t myimg ."
+        sh "docker build -t myimg:1 ."
       }
     }
     stage('cont_test') {
       steps {
         sh '''
-          docker run -itd --name test-cont -p 8081:5000 myimg
+          docker run -itd --name test-cont -p 8081:5000 myimg:1
           success=1
           for i in {1..10}; do
             echo "HTTP check attempt $i"
