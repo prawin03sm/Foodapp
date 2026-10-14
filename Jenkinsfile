@@ -24,7 +24,7 @@ pipeline {
     stage('cont_test') {
       steps {
         sh '''
-          docker run -itd --name test-cont -p 8081:5000
+          docker run -itd --name test-cont -p 8081:5000 myimg
           success=1
           for i in {1..10}; do
             echo "HTTP check attempt $i"
