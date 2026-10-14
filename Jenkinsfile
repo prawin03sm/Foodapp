@@ -18,7 +18,8 @@ pipeline {
     }
     stage('build') {
       steps {
-        sh "docker build -t myimg:1 ."
+        sh "docker build -t myimg ."
+        sh "docker tag myimg prawin03sm/myimg:1"
       }
     }
     stage('cont_test') {
