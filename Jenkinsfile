@@ -63,5 +63,14 @@ pipeline {
         }
       }
     }
+    stage('deploy') {
+      steps {
+        sshagent(['jenkinsid']) {
+          sh '''
+            ssh ubuntu@10.10.1.48 'docker pull prawin03sm/foodapp:1'
+          '''
+        }
+      }
+    }
   }
 }
