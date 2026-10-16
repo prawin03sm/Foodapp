@@ -67,7 +67,12 @@ pipeline {
       steps {
         sshagent(['jenkinsid']) {
           sh '''
-            ssh ubuntu@10.10.1.48 'docker pull prawin03sm/foodapp:1'
+            ssh ubuntu@10.10.1.48 '
+              set -e
+              docker pull prawin03sm/foodapp:1
+              docker rm -f food || true
+              docker run -d --name food -p 80:5000 prawin03sm/foodapp:1
+	    '
           '''
         }
       }
