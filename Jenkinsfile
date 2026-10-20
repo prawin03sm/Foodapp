@@ -77,5 +77,26 @@ pipeline {
         }
       }
     }
+    stage('health check') {
+      steps {
+        sh '''#!/bin/bash
+          success=0
+          for i in {1..5}; do
+            echo "Healthcheck attempt $i"
+              if curl -f http://localhost/; then
+                success=1
+                break
+              fi
+              sleep 3
+          done
+          if [ "$success" -eq 1 ]; then
+            echo "Application Healthy"
+            exit 0
+          fi
+          echo "Application not Healthy"
+          exit 1
+        '''
+      }
+    }
   }
 }
