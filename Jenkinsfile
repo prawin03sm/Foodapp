@@ -83,7 +83,7 @@ pipeline {
           success=0
           for i in {1..5}; do
             echo "Healthcheck attempt $i"
-              if curl -f http://localhost/; then
+              if curl -f http://localhost:5000/; then
                 success=1
                 break
               fi
